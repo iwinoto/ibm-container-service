@@ -9,6 +9,7 @@ else
 fi
 
 PAID=false
+OFFERING=free
 
 Parse_Arguments() {
 	while [ $# -gt 0 ]; do
@@ -16,7 +17,13 @@ Parse_Arguments() {
 			--paid)
 				echo "Configured to setup a paid storage on ibm-cs"
 				PAID=true
+        OFFERING=paid
 				;;
+      --icp)
+        echo "Configured to setup on IBM Cloud Private"
+        ICP=true
+        OFFERING=icp
+        ;;
 		esac
 		shift
 	done
@@ -24,11 +31,11 @@ Parse_Arguments() {
 
 Parse_Arguments $@
 
-if [ "${PAID}" == "true" ]; then
-	OFFERING="paid"
-else
-	OFFERING="free"
-fi
+#if [ "${PAID}" == "true" ]; then
+#	OFFERING="paid"
+#else
+#	OFFERING="free"
+#fi
 
 echo "Creating composer-card-import pod"
 echo "Running: kubectl create -f ${KUBECONFIG_FOLDER}/composer-card-import.yaml"

@@ -13,7 +13,7 @@ spec:
       volumes:
       - name: shared
         persistentVolumeClaim:
-          claimName: shared-pvc
+          claimName: blockchain-shared-pvc
       containers:
       - name: marbles-demo
         image: dhyeyibm/container-service-marbles:1.0.1

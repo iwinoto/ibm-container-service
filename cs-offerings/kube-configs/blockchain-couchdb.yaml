@@ -8,13 +8,13 @@ spec:
   volumes:
   - name: shared
     persistentVolumeClaim:
-      claimName: shared-pvc
+      claimName: blockchain-shared-pvc
   - name: dockersocket
     hostPath:
       path: /var/run/docker.sock
   - name: composer-card-store
     persistentVolumeClaim:
-      claimName: composer-pvc
+      claimName: blockchain-composer-pvc
   containers:
   - name: cryptogen
     image: ibmblockchain/fabric-tools:1.0.3
@@ -69,7 +69,7 @@ spec:
       volumes:
       - name: shared
         persistentVolumeClaim:
-          claimName: shared-pvc
+          claimName: blockchain-shared-pvc
 
       containers:
       - name: pulse
@@ -132,7 +132,7 @@ spec:
       volumes:
       - name: shared
         persistentVolumeClaim:
-          claimName: shared-pvc
+          claimName: blockchain-shared-pvc
 
       containers:
       - name: ca
@@ -174,7 +174,7 @@ spec:
       volumes:
       - name: shared
         persistentVolumeClaim:
-          claimName: shared-pvc
+          claimName: blockchain-shared-pvc
       - name: dockersocket
         hostPath:
           path: /var/run/docker.sock
@@ -262,7 +262,7 @@ spec:
       volumes:
       - name: shared
         persistentVolumeClaim:
-          claimName: shared-pvc
+          claimName: blockchain-shared-pvc
       - name: dockersocket
         hostPath:
           path: /var/run/docker.sock

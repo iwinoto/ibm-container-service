@@ -8,10 +8,10 @@ spec:
   volumes:
   - name: composer-card-store
     persistentVolumeClaim:
-      claimName: composer-pvc
+      claimName: blockchain-composer-pvc
   - name: shared
     persistentVolumeClaim:
-      claimName: shared-pvc
+      claimName: blockchain-shared-pvc
 
   containers:
   - name: wipeshared

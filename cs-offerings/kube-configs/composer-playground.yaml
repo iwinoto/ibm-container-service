@@ -13,7 +13,7 @@ spec:
       volumes:
       - name: composer-card-store
         persistentVolumeClaim:
-          claimName: composer-pvc
+          claimName: blockchain-composer-pvc
       containers:
       - name: composer-playground
         image: ibmblockchain/composer-playground:0.16.2

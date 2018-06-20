@@ -8,7 +8,7 @@ spec:
   volumes:
   - name: shared
     persistentVolumeClaim:
-      claimName: shared-pvc
+      claimName: blockchain-shared-pvc
 
   containers:
   - name: chaincodeinstantiate

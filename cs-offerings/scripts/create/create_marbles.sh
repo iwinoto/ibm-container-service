@@ -8,13 +8,22 @@ else
 fi
 
 PAID=false
+OFFERING=free
+PUBLIC_IP=$(bx cs workers blockchain | awk 'FNR==3{print $2}')
 
 Parse_Arguments() {
 	while [ $# -gt 0 ]; do
 		case $1 in
 			--paid)
 				PAID=true
+        OFFERING=paid
+        PUBLIC_IP=$(kubectl get svc | grep marbles | awk '{print $3}' )
 				;;
+      --icp)
+        ICP=true
+        OFFERING=icp
+        PUBLIC_IP=$(kubectl get svc | grep marbles | awk '{print $3}' )
+        ;;
 		esac
 		shift
 	done
@@ -22,13 +31,13 @@ Parse_Arguments() {
 
 Parse_Arguments $@
 
-if [ "${PAID}" == "true" ]; then
-	OFFERING="paid"
-	PUBLIC_IP=$(kubectl get svc | grep marbles | awk '{print $3}' )
-else
-	OFFERING="free"
-	PUBLIC_IP=$(bx cs workers blockchain | awk 'FNR==3{print $2}')
-fi
+#if [ "${PAID}" == "true" ]; then
+#	OFFERING="paid"
+#	PUBLIC_IP=$(kubectl get svc | grep marbles | awk '{print $3}' )
+#else
+#	OFFERING="free"
+#	PUBLIC_IP=$(bx cs workers blockchain | awk 'FNR==3{print $2}')
+#fi
 
 echo "Creating marbles service"
 echo "Running: kubectl create -f ${KUBECONFIG_FOLDER}/marbles-services-${OFFERING}.yaml"

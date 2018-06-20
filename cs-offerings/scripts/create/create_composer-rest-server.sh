@@ -9,6 +9,7 @@ else
 fi
 
 PAID=false
+OFFERING=free
 
 Parse_Arguments() {
 	while [ $# -gt 0 ]; do
@@ -16,11 +17,17 @@ Parse_Arguments() {
 			--paid)
 				echo "Configured to setup a paid storage on ibm-cs"
 				PAID=true
+        OFFERING=paid
 				;;
+      --icp)
+        echo "Configured to setup on IBM Cloud Private"
+        ICP=true
+        OFFERING=icp
+        ;;
 			--business-network-card)
 				shift
 				COMPOSER_CARD=$1
-				;;	
+				;;
 		esac
 		shift
 	done
@@ -28,11 +35,11 @@ Parse_Arguments() {
 
 Parse_Arguments $@
 
-if [ "${PAID}" == "true" ]; then
-	OFFERING="paid"
-else
-	OFFERING="free"
-fi
+#if [ "${PAID}" == "true" ]; then
+#	OFFERING="paid"
+#else
+#	OFFERING="free"
+#fi
 
 if [ -z ${COMPOSER_CARD} ]; then
 	echo "Usage: $0 --business-network-card <business-network-card> [--paid]"
